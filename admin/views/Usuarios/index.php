@@ -1,7 +1,7 @@
 <?php 
-   require_once "../../controllers/FilmeController.php";
-   $FilmeController = new FilmeController();
-   $resultData = $FilmeController->read();
+   require_once "../../controllers/UsuarioController.php";
+   $UsuarioController = new UsuarioController();
+   $resultData = $UsuarioController->read();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,18 +17,16 @@
         <div class="row mt-3">
             <?php include "../includes/menu.php"; ?>
             <div class="col-9">
-                <h3>Cadastro de Filmes</h3>
+                <h3>Cadastro de Usuarios</h3>
                 <a href="adicionar.php" class="btn btn-success">Adicionar</a>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Genero</th>
-                            <th scope="col">Filme</th>
-                            <th scope="col">Diretor</th>
-                            <th scope="col">Duração</th>
-                            <th scope="col">Estudante</th>
-                            <th scope="col">Descrição</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Senha</th>
+                            <th scope="col">Telefone</th>
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
@@ -36,14 +34,13 @@
                             <?php foreach($resultData as $data){ ?>
                                 <tr>
                                     <th><?= $data->getId() ?></th>
-                                    <th><?= $data->getGenero() ?></th>
-                                    <th><?= $data->getFilme() ?></th>
-                                    <th><?= $data->getDiretor() ?></th>
-                                    <th><?= $data->getDuracao() ?></th>
-                                    <th><?= $data->getEstudante() ?></th>
-                                    <th><?= $data->getDescricao() ?></th>
+                                    <th><?= $data->getNome() ?></th>
+                                    <th><?= $data->getEmail() ?></th>
+                                    <th><?= $data->getSenha() ?></th>
+                                    <th><?= $data->getTelefone() ?></th>
                                     <th>
                                         <a class='btn btn-info' href="editar.php?id=<?= $data->getId() ?>">Editar</a>
+                                        <a class='btn btn-primary' href="editarSenha.php?id=<?= $data->getId() ?>">Editar Senha</a>
                                         <button class='btn btn-danger' onClick='excluir(<?= $data->getId() ?>)'>Excluir</button>
                                     </th>
                                 </tr>

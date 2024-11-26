@@ -1,26 +1,29 @@
 <?php
 
-require_once "../../models/FilmeModel.php";
+require_once "../../models/UsuarioModel.php";
 
-class FilmeController {
+class UsuarioController {
 
     private $model;
 
     function __construct()
     {
-        $this->model = new FilmeModel();
+        $this->model = new UsuarioModel();
     }
 
     public function read() {
         return $this->model->read();
     }
 
-    public function add(Filme $c) {
+    public function add(Usuario $c) {
         return $this->model->create($c);
     }
 
-    public function edit(Filme $c) {
+    public function edit(Usuario $c) {
         return $this->model->update($c);
+    }
+    public function editPass(string $oldPass, string $newPass, string $confirmnewPass, int $id) {
+        return $this->model->updatePass($c);
     }
 
     public function findId($id) {

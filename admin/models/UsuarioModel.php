@@ -8,9 +8,9 @@ class UsuarioModel
 
     public $tabela = "usuarios";
 
-    public function create(usuario $c){
+    public function create(Usuario $c){
         try{
-            $sql = "INSERT INTO $this->tabela (nome, email, senha, telefone) VALUES (?,?,?,?,?,?)";
+            $sql = "INSERT INTO $this->tabela (nome, email, senha, telefone) VALUES (?,?,?,?)";
             $stmt = Conexao::getConn()->prepare($sql);
             $stmt->bindValue(1, $c->getNome());
             $stmt->bindValue(2, $c->getEmail());
@@ -25,7 +25,7 @@ class UsuarioModel
     }
     public function read(){
         $stmt = Conexao::getConn()->prepare("SELECT * FROM $this->tabela");
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'usuario');
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Usuario');
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -33,22 +33,19 @@ class UsuarioModel
     public function findId($id){
         $stmt = Conexao::getConn()->prepare("SELECT * FROM $this->tabela WHERE id = ?");
         $stmt->bindParam(1,$id);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'usuario');
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Usuario');
         $stmt->execute();
         return $stmt->fetch();
     }
 
-    public function update(usuario $c){
+    public function update(Usuario $c){
         try{
-            $sql = "UPDATE $this->tabela SET genero = ?, usuario = ?, descricao = ?, diretor = ?, duracao = ?, estudante = ?, WHERE id = ?";
+            $sql = "UPDATE $this->tabela SET nome = ?, email = ?, telefone = ? WHERE id = ?";
             $stmt = Conexao::getConn()->prepare($sql);
-            $stmt->bindValue(1, $c->getGenero());
-            $stmt->bindValue(2, $c->getusuario());
-            $stmt->bindValue(3, $c->getDescricao());
-            $stmt->bindValue(4, $c->getDiretor());
-            $stmt->bindValue(5, $c->getDuracao());
-            $stmt->bindValue(6, $c->getEstudante());
-            $stmt->bindValue(7, $c->getId());
+            $stmt->bindValue(1, $c->getNome());
+            $stmt->bindValue(2, $c->getEmail());
+            $stmt->bindValue(3, $c->getTelefone());
+            $stmt->bindValue(4, $c->getId());
             return $stmt->execute();
         }
         catch(PDOException $e){
@@ -61,6 +58,19 @@ class UsuarioModel
             $sql = "DELETE FROM $this->tabela WHERE id = ?";
             $stmt = Conexao::getConn()->prepare($sql);
             $stmt->bindValue(1, $id);
+            return $stmt->execute();
+        }
+        catch(PDOException $e){
+            echo "Erro: " . $e->getMessage();
+            echo "Número: " . (int)$e->getCode();
+        }
+    }
+    public function updatePass(Usuario $c){
+        try{
+            $sql = "UPDATE $this->tabela SET senha = ? WHERE id = ?";
+            $stmt = Conexao::getConn()->prepare($sql);
+            $stmt->bindValue(1, $c->getSenha());
+            $stmt->bindValue(2, $c->getId());
             return $stmt->execute();
         }
         catch(PDOException $e){

@@ -1,11 +1,11 @@
 <?php
 
 if(isset($_GET['id']) && !empty($_GET['id'])){
-    require_once "../../controllers/FilmeController.php";
+    require_once "../../controllers/UsuarioController.php";
 
-    $FilmeController = new FilmeController();
+    $UsuarioController = new UsuarioController();
 
-    $res = $FilmeController->remove($_GET['id']);
+    $res = $UsuarioController->remove($_GET['id']);
 
     if($res){
         header("location: ./");
