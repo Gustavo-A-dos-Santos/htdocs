@@ -1,25 +1,25 @@
 <?php
-    require_once "../../controllers/JogosController.php";
+include "../includes/autoLoad.php";
+Security::verifyAuthentication();
+require_once "../../controllers/JogoController.php";
 
-    $JogosController = new JogosController();
+$JogoController = new JogoController();
 
-    if(isset($_POST) && count($_POST)){
-        $c = new Jogo();
-        $c->setId(htmlspecialchars($_POST['campoId']));
-        $c->setJogo(htmlspecialchars($_POST['campoJogo']));
-        $c->setNumeroIntegrantes(htmlspecialchars($_POST['campoNumeroIntegrantes']));
-        $c->setRegras(htmlspecialchars($_POST['campoRegras']));
+if (isset($_POST) && count($_POST)) {
+    $c = new Jogo();
+    $c->setId(htmlspecialchars($_POST['campoId']));
+    $c->setJogo(htmlspecialchars($_POST['campoJogo']));
+    $c->setNumerointegrantes(htmlspecialchars($_POST['campoIntegrantes']));
 
-        $res = $JogosController->edit($c);
+    $res = $JogoController->edit($c);
 
-        if($res){
-            header("location: ./");
-            exit();
-        }
+    if ($res) {
+        header("location: ./");
+        exit();
     }
-    else if(isset($_GET['id']) && !empty($_GET['id'])){
-        $dado = $JogosController->findId($_GET['id']);
-    }
+} else if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $dado = $JogoController->findId($_GET['id']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -35,20 +35,16 @@
         <div class="row mt-3">
             <?php include "../includes/menu.php"; ?>
             <div class="col-9">
-                <h3>Editar Jogo</h3>
+                <h3>Cadastro de categorias</h3>
                 <form action="" method="post">
                     <input type="hidden" name="campoId" value="<?= $dado->getId(); ?>">
                     <div class="mb-3">
                         <label for="idJogo" class="form-label">Jogo:</label>
-                        <input type="text" value="<?= $dado->getJogo(); ?>" class="form-control" name="campoJogo" id="idJogo" placeholder="Informe a categoria">
-                    </div>
-                    <div class="mb-3">
-                        <label for="idNumeroIntegrantes" class="form-label">Número Integrantes:</label>
-                        <input type="number" value="<?= $dado->getNumeroIntegrantes(); ?>" class="form-control" name="campoNumeroIntegrantes" id="idJogo" placeholder="Informe o número de integrantes">
+                        <input type="text" class="form-control" name="campoJogo" id="idJogo" placeholder="Informe o jogo" value="<?= $dado->getjogo(); ?>">
                     </div>
                     <div class="mt-3 mb-3">
-                        <label for="idRegras" class="form-label">Regras:</label>
-                        <textarea class="form-control" id="idRegras" name="campoRegras" placeholder="Insira as regras"><?= $dado->getRegras(); ?></textarea>
+                        <label for="idIntegrantes" class="form-label">Numero de integrantes:</label>
+                        <input type="number" class="form-control" id="idIntegrantes" name="campoIntegrantes" placeholder="Insira o número de integrantes" value="<?= $dado->getNumerointegrantes(); ?>" />
                     </div>
                     <button type="submit" class="btn btn-success">Gravar</button>
                     <a href="./" class="btn btn-primary">Voltar</a>

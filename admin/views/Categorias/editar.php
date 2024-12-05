@@ -1,24 +1,25 @@
 <?php
-    require_once "../../controllers/CategoriaController.php";
+include "../includes/autoLoad.php";
+Security::verifyAuthentication();
+require_once "../../controllers/CategoriaController.php";
 
-    $CategoriaController = new CategoriaController();
+$CategoriaController = new CategoriaController();
 
-    if(isset($_POST) && count($_POST)){
-        $c = new Categoria();
-        $c->setId(htmlspecialchars($_POST['campoId']));
-        $c->setNome(htmlspecialchars($_POST['campoNome']));
-        $c->setDescricao(htmlspecialchars($_POST['campoDescricao']));
+if (isset($_POST) && count($_POST)) {
+    $c = new Categoria();
+    $c->setId(htmlspecialchars($_POST['campoId']));
+    $c->setNome(htmlspecialchars($_POST['campoNome']));
+    $c->setDescricao(htmlspecialchars($_POST['campoDescricao']));
 
-        $res = $CategoriaController->edit($c);
+    $res = $CategoriaController->edit($c);
 
-        if($res){
-            header("location: ./");
-            exit();
-        }
+    if ($res) {
+        header("location: ./");
+        exit();
     }
-    else if(isset($_GET['id']) && !empty($_GET['id'])){
-        $dado = $CategoriaController->findId($_GET['id']);
-    }
+} else if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $dado = $CategoriaController->findId($_GET['id']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -39,7 +40,7 @@
                     <input type="hidden" name="campoId" value="<?= $dado->getId(); ?>">
                     <div class="mb-3">
                         <label for="idNome" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" name="campoNome" 
+                        <input type="text" class="form-control" name="campoNome"
                             id="idNome" placeholder="Seu nome completo"
                             value="<?= $dado->getNome() ?>">
                     </div>

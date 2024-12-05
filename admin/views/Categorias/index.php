@@ -1,7 +1,9 @@
-<?php 
-   require_once "../../controllers/CategoriaController.php";
-   $CategoriaController = new CategoriaController();
-   $resultData = $CategoriaController->read();
+<?php
+include "../includes/autoLoad.php";
+Security::verifyAuthentication();
+require_once "../../controllers/CategoriaController.php";
+$CategoriaController = new CategoriaController();
+$resultData = $CategoriaController->read();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -29,17 +31,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                            <?php foreach($resultData as $data){ ?>
-                                <tr>
-                                    <th><?= $data->getId() ?></th>
-                                    <th><?= $data->getNome() ?></th>
-                                    <th><?= $data->getDescricao() ?></th>
-                                    <th>
-                                        <a class='btn btn-info' href="editar.php?id=<?= $data->getId() ?>">Editar</a>
-                                        <button class='btn btn-danger' onClick='excluir(<?= $data->getId() ?>)'>Excluir</button>
-                                    </th>
-                                </tr>
-                            <?php } ?>
+                        <?php foreach ($resultData as $data) { ?>
+                            <tr>
+                                <th><?= $data->getId() ?></th>
+                                <th><?= $data->getNome() ?></th>
+                                <th><?= $data->getDescricao() ?></th>
+                                <th>
+                                    <a class='btn btn-info' href="editar.php?id=<?= $data->getId() ?>">Editar</a>
+                                    <button class='btn btn-danger' onClick='excluir(<?= $data->getId() ?>)'>Excluir</button>
+                                </th>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -48,7 +50,7 @@
     <?php include "../includes/js.php"; ?>
     <script>
         function excluir(id) {
-            if(confirm("Tem certeza?")) {
+            if (confirm("Tem certeza?")) {
                 window.location = "excluir.php?id=" + id;
             }
         }

@@ -1,7 +1,9 @@
-<?php 
-   require_once "../../controllers/jogosController.php";
-   $JogosController = new JogosController();
-   $resultData = $JogosController->read();
+<?php
+include "../includes/autoLoad.php";
+Security::verifyAuthentication();
+require_once "../../controllers/JogoController.php";
+$JogoController = new JogoController();
+$resultData = $JogoController->read();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,25 +25,23 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Jogos</th>
-                            <th scope="col">Numero Integrantes</th>
-                            <th scope="col">Regras</th>
+                            <th scope="col">Jogo</th>
+                            <th scope="col">Numero de integrantes</th>
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                            <?php foreach($resultData as $data){ ?>
-                                <tr>
-                                    <th><?= $data->getId() ?></th>
-                                    <th><?= $data->getJogo() ?></th>
-                                    <th><?= $data->getNumeroIntegrantes() ?></th>
-                                    <th><?= $data->getRegras() ?></th>
-                                    <th>
-                                        <a class='btn btn-info' href="editar.php?id=<?= $data->getId() ?>">Editar</a>
-                                        <button class='btn btn-danger' onClick='excluir(<?= $data->getId() ?>)'>Excluir</button>
-                                    </th>
-                                </tr>
-                            <?php } ?>
+                        <?php foreach ($resultData as $data) { ?>
+                            <tr>
+                                <th><?= $data->getId() ?></th>
+                                <th><?= $data->getJogo() ?></th>
+                                <th><?= $data->getNumerointegrantes() ?></th>
+                                <th>
+                                    <a class='btn btn-info' href="editar.php?id=<?= $data->getId() ?>">Editar</a>
+                                    <button class='btn btn-danger' onClick='excluir(<?= $data->getId() ?>)'>Excluir</button>
+                                </th>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -50,7 +50,7 @@
     <?php include "../includes/js.php"; ?>
     <script>
         function excluir(id) {
-            if(confirm("Tem certeza?")) {
+            if (confirm("Tem certeza?")) {
                 window.location = "excluir.php?id=" + id;
             }
         }

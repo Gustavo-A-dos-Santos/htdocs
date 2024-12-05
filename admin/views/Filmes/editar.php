@@ -1,4 +1,6 @@
 <?php
+include "../includes/autoLoad.php";
+Security::verifyAuthentication();
 require_once "../../controllers/FilmeController.php";
 
 $FilmeController = new FilmeController();
@@ -6,8 +8,8 @@ $FilmeController = new FilmeController();
 if (isset($_POST) && count($_POST)) {
     $c = new Filme();
     $c->setId(htmlspecialchars($_POST['campoId']));
-    $c->setGenero(htmlspecialchars($_POST['campoGenero']));
     $c->setFilme(htmlspecialchars($_POST['campoFilme']));
+    $c->setGenero(htmlspecialchars($_POST['campoGenero']));
     $c->setDescricao(htmlspecialchars($_POST['campoDescricao']));
     $c->setDiretor(htmlspecialchars($_POST['campoDiretor']));
     $c->setDuracao(htmlspecialchars($_POST['campoDuracao']));
@@ -37,32 +39,32 @@ if (isset($_POST) && count($_POST)) {
         <div class="row mt-3">
             <?php include "../includes/menu.php"; ?>
             <div class="col-9">
-                <h3>Cadastro de Filmes</h3>
+                <h3>Cadastro de filmes</h3>
                 <form action="" method="post">
                     <input type="hidden" name="campoId" value="<?= $dado->getId(); ?>">
                     <div class="mb-3">
-                        <label for="idGenero" class="form-label">Genero:</label>
-                        <input type="text" value="<?= $dado->getGenero() ?>" class="form-control" name="campoGenero" id="idGenero" placeholder="Informe o genero.">
-                    </div>
-                    <div class="mb-3">
                         <label for="idFilme" class="form-label">Filme:</label>
-                        <input type="text" value="<?= $dado->getFilme() ?>" class="form-control" name="campoFilme" id="idFilme" placeholder="Informe o filme.">
-                    </div>
-                    <div class="mb-3">
-                        <label for="idDiretor" class="form-label">Diretor:</label>
-                        <input type="text" value="<?= $dado->getDiretor() ?>" class="form-control" name="campoDiretor" id="idDiretor" placeholder="Informe o diretor.">
-                    </div>
-                    <div class="mb-3">
-                        <label for="idDuracao" class="form-label">Duração:</label>
-                        <input type="text" value="<?= $dado->getDuracao() ?>" class="form-control" name="campoDuracao" id="idDuracao" placeholder="Informe a duração.">
-                    </div>
-                    <div class="mb-3">
-                        <label for="idEstudante" class="form-label">Estudante:</label>
-                        <input type="text" value="<?= $dado->getEstudante() ?>" class="form-control" name="campoEstudante" id="idEstudante" placeholder="Informe o estudante.">
+                        <input type="text" class="form-control" name="campoFilme" id="idFilme" placeholder="Informe o filme" value="<?= $dado->getFilme(); ?>">
                     </div>
                     <div class="mt-3 mb-3">
-                        <label for="idDescricao" class="form-label">Descrição</label>
-                        <textarea class="form-control" id="idDescricao" name="campoDescricao" placeholder="Insira uma descrição"><?= $dado->getDescricao() ?></textarea>
+                        <label for="idGenero" class="form-label">Gênero:</label>
+                        <input type="text" class="form-control" id="idGenero" name="campoGenero" placeholder="Insira o gênero" value="<?= $dado->getGenero(); ?>" />
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <label for="idDescricao" class="form-label">Descrição:</label>
+                        <textarea class="form-control" id="idDescricao" name="campoDescricao" /><?= $dado->getDescricao(); ?></textarea>
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <label for="idDiretor" class="form-label">Diretor:</label>
+                        <input type="text" class="form-control" id="idDiretor" name="campoDiretor" placeholder="Insira o diretor" value="<?= $dado->getDiretor(); ?>" />
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <label for="idDuracao" class="form-label">Duração:</label>
+                        <input type="time" class="form-control" id="idDuracao" name="campoDuracao" value="<?= $dado->getDuracao(); ?>" />
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <label for="idEstudante" class="form-label">Estudante:</label>
+                        <input type="text" class="form-control" id="idEstudante" name="campoEstudante" placeholder="Insira o estudante" value="<?= $dado->getEstudante(); ?>" />
                     </div>
                     <button type="submit" class="btn btn-success">Gravar</button>
                     <a href="./" class="btn btn-primary">Voltar</a>

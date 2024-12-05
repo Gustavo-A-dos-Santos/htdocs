@@ -1,19 +1,21 @@
 <?php
-    if(isset($_POST) && count($_POST)){
-        require_once "../../controllers/CategoriaController.php";
+include "../includes/autoLoad.php";
+Security::verifyAuthentication();
+if (isset($_POST) && count($_POST)) {
+    require_once "../../controllers/CategoriaController.php";
 
-        $c = new Categoria();
-        $c->setNome(htmlspecialchars($_POST['campoNome']));
-        $c->setDescricao(htmlspecialchars($_POST['campoDescricao']));
+    $c = new Categoria();
+    $c->setNome(htmlspecialchars($_POST['campoNome']));
+    $c->setDescricao(htmlspecialchars($_POST['campoDescricao']));
 
-        $CategoriaController = new CategoriaController();
-        $res = $CategoriaController->add($c);
+    $CategoriaController = new CategoriaController();
+    $res = $CategoriaController->add($c);
 
-        if($res){
-            header("location: ./");
-            exit();
-        }
+    if ($res) {
+        header("location: ./");
+        exit();
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

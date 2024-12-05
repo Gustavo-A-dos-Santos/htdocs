@@ -1,138 +1,96 @@
 <?php
 
-class Filme
-{
+class Filme{
     private int $id;
-    private string $genero;
     private string $filme;
+    private string $genero;
     private string $descricao;
     private string $diretor;
     private string $duracao;
     private string $estudante;
 
-    /**
-     * Get the value of id
-     */ 
+    
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     */ 
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
-    /**
-     * Get the value of genero
-     */ 
-    public function getGenero()
-    {
-        return $this->genero;
-    }
-
-    /**
-     * Set the value of genero
-     *
-     */ 
-    public function setGenero($genero)
-    {
-        $this->genero = $genero;
-
-    }
-    
-
-    /**
-     * Get the value of filme
-     */ 
     public function getFilme()
     {
         return $this->filme;
     }
 
-    /**
-     * Set the value of filme
-     *
-     */ 
     public function setFilme($filme)
     {
         $this->filme = $filme;
 
+        return $this;
     }
 
-    /**
-     * Get the value of descricao
-     */ 
+    public function getGenero()
+    {
+        return $this->genero;
+    }
+
+    public function setGenero($genero)
+    {
+        $this->genero = $genero;
+
+        return $this;
+    }
+
     public function getDescricao()
     {
         return $this->descricao;
     }
 
-    /**
-     * Set the value of descricao
-     *
-     */ 
     public function setDescricao($descricao)
     {
         $this->descricao = $descricao;
 
+        return $this;
     }
 
-    /**
-     * Get the value of diretor
-     */ 
     public function getDiretor()
     {
         return $this->diretor;
     }
 
-    /**
-     * Set the value of diretor
-     *
-     */ 
     public function setDiretor($diretor)
     {
         $this->diretor = $diretor;
 
+        return $this;
     }
 
-    /**
-     * Get the value of duracao
-     */ 
     public function getDuracao()
     {
         return $this->duracao;
     }
 
-    /**
-     * Set the value of duracao
-     *
-     */ 
     public function setDuracao($duracao)
     {
         $this->duracao = $duracao;
 
+        return $this;
     }
 
-    /**
-     * Get the value of estudante
-     */ 
     public function getEstudante()
     {
         return $this->estudante;
     }
 
-    /**
-     * Set the value of estudante
-     *
-     */ 
     public function setEstudante($estudante)
     {
         $this->estudante = $estudante;
 
+        return $this;
     }
 }

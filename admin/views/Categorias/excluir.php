@@ -1,13 +1,15 @@
 <?php
+include "../includes/autoLoad.php";
+Security::verifyAuthentication();
 
-if(isset($_GET['id']) && !empty($_GET['id'])){
+if (isset($_GET['id']) && !empty($_GET['id'])) {
     require_once "../../controllers/CategoriaController.php";
 
     $CategoriaController = new CategoriaController();
 
     $res = $CategoriaController->remove($_GET['id']);
 
-    if($res){
+    if ($res) {
         header("location: ./");
         exit();
     }
